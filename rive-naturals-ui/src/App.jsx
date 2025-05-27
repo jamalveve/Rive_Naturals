@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Show landing page */}
-        <Route path="/" element={<SkinCareLanding />} />
+        <Route path="/skincarelanding" element={<SkinCareLanding />} />
         {/* Login and Register pages */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

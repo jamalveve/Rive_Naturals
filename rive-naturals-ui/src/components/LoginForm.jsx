@@ -1,10 +1,39 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import SkinCareLanding from "../pages/SkincareLanding";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  //added for handle login function
+const [name, setName] = useState('');
+const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8080/api/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, password }),
+      });
+      const result = await response.text();
+
+      if (result === "Login successful") {
+        alert(result);
+        navigate("/SkinCareLanding");  // redirect to home page
+      } else {
+        alert("Invalid credentials");
+      }
+    } catch (error) {
+      alert('Login failed!');
+      console.error(error);
+    }
+  };
   return (
+
+
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#3b5d3a] via-[#4b7447] to-[#233d1e]">
       <div className="w-full max-w-sm flex flex-col items-center">
         {/* Logo */}
@@ -51,16 +80,24 @@ const LoginPage = () => {
         <div className="w-full bg-white/20 backdrop-blur-lg border border-white/30 rounded-tl-2xl rounded-tr-2xl rounded-bl-lg rounded-br-lg p-6 shadow-2xl">
           <h3 className="text-2xl font-bold text-[#e7edea] mb-1 text-center">Login</h3>
           <p className="text-[#ffffff] text-center mb-6">Sign in to continue</p>
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4"
+          //added for handle login function
+           onSubmit={handleLogin}>
             <input
               type="text"
               placeholder="Name"
+              // handle login
+                value={name}
+              onChange={e => setName(e.target.value)}
               className="rounded-full px-4 py-2 bg-[#8EC3A7] text-[#386150] placeholder-[#386150] focus:outline-none"
             />
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
+                //added for handle login function
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 className="rounded-full px-4 py-2 bg-[#8EC3A7] text-[#386150] placeholder-[#386150] focus:outline-none w-full"
               />
               <button

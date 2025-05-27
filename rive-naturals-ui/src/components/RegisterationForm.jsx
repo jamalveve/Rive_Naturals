@@ -1,43 +1,80 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 
 const passwordRequirements = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+//db connection
 
 const RegisterPage = () => {
-    const [form, setForm] = useState({
-        name: "",
-        password: "",
-        confirmPassword: "",
-    });
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirm, setShowConfirm] = useState(false);
-    const [errors, setErrors] = useState({});
+  const [form, setForm] = useState({
+    name: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-        setErrors({ ...errors, [e.target.name]: "" });
-    };
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
 
-    const validate = () => {
-        let newErrors = {};
-        if (!form.name.trim()) newErrors.name = "Name is required";
-        if (!passwordRequirements.test(form.password))
-            newErrors.password =
-                "Password must be at least 8 characters and include a letter, number, and symbol";
-        if (form.password !== form.confirmPassword)
-            newErrors.confirmPassword = "Passwords do not match";
-        return newErrors;
-    };
+  const validate = () => {
+    const errors = {};
+    if (!form.name) {
+      errors.name = "Name is required";
+    }
+    if (!form.password) {
+      errors.password = "Password is required";
+    } else if (!passwordRequirements.test(form.password)) {
+      errors.password =
+        "Password must be at least 8 characters, include a letter, a number, and a special character.";
+    }
+    if (form.password !== form.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+    return errors;
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const validationErrors = validate();
-        setErrors(validationErrors);
-        if (Object.keys(validationErrors).length === 0) {
-            // Submit logic here
-            alert("Registration successful!");
-        }
-    };
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log("Submitting form with data:", form);  // <--- add this
+
+  const validationErrors = validate();
+  setErrors(validationErrors);
+
+  if (Object.keys(validationErrors).length === 0) {
+    try {
+      console.log("Sending fetch request...");
+      const response = await fetch("http://localhost:8080/api/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          password: form.password,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorMsg = await response.text();
+        alert(errorMsg || "Registration failed!");
+        return;
+      }
+
+      alert("Registration successful!");
+      setForm({ name: "", password: "", confirmPassword: "" });
+      setErrors({});
+      navigate("/login");
+    } catch (error) {
+      alert("Registration failed!");
+      console.error(error);
+    }
+  } else {
+    console.log("Validation errors:", validationErrors);
+  }
+};
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#3b5d3a] via-[#4b7447] to-[#233d1e]">
