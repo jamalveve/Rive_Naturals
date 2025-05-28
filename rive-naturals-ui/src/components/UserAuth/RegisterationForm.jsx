@@ -1,80 +1,80 @@
 import React, { useState } from "react";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const passwordRequirements = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]).{8,}$/;
 //db connection
 
 const RegisterPage = () => {
-  const [form, setForm] = useState({
-    name: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
+    const [form, setForm] = useState({
+        name: "",
+        password: "",
+        confirmPassword: "",
+    });
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+        setErrors({ ...errors, [e.target.name]: "" });
+    };
 
-  const validate = () => {
-    const errors = {};
-    if (!form.name) {
-      errors.name = "Name is required";
-    }
-    if (!form.password) {
-      errors.password = "Password is required";
-    } else if (!passwordRequirements.test(form.password)) {
-      errors.password =
-        "Password must be at least 8 characters, include a letter, a number, and a special character.";
-    }
-    if (form.password !== form.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
-    }
-    return errors;
-  };
+    const validate = () => {
+        const errors = {};
+        if (!form.name) {
+            errors.name = "Name is required";
+        }
+        if (!form.password) {
+            errors.password = "Password is required";
+        } else if (!passwordRequirements.test(form.password)) {
+            errors.password =
+                "Password must be at least 8 characters, include a letter, a number, and a special character.";
+        }
+        if (form.password !== form.confirmPassword) {
+            errors.confirmPassword = "Passwords do not match";
+        }
+        return errors;
+    };
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  console.log("Submitting form with data:", form);  // <--- add this
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("Submitting form with data:", form);  // <--- add this
 
-  const validationErrors = validate();
-  setErrors(validationErrors);
+        const validationErrors = validate();
+        setErrors(validationErrors);
 
-  if (Object.keys(validationErrors).length === 0) {
-    try {
-      console.log("Sending fetch request...");
-      const response = await fetch("http://localhost:8080/api/users/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          password: form.password,
-        }),
-      });
+        if (Object.keys(validationErrors).length === 0) {
+            try {
+                console.log("Sending fetch request...");
+                const response = await fetch("http://localhost:8080/api/users/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: form.name,
+                        password: form.password,
+                    }),
+                });
 
-      if (!response.ok) {
-        const errorMsg = await response.text();
-        alert(errorMsg || "Registration failed!");
-        return;
-      }
+                if (!response.ok) {
+                    const errorMsg = await response.text();
+                    alert(errorMsg || "Registration failed!");
+                    return;
+                }
 
-      alert("Registration successful!");
-      setForm({ name: "", password: "", confirmPassword: "" });
-      setErrors({});
-      navigate("/login");
-    } catch (error) {
-      alert("Registration failed!");
-      console.error(error);
-    }
-  } else {
-    console.log("Validation errors:", validationErrors);
-  }
-};
+                alert("Registration successful!");
+                setForm({ name: "", password: "", confirmPassword: "" });
+                setErrors({});
+                navigate("/login");
+            } catch (error) {
+                alert("Registration failed!");
+                console.error(error);
+            }
+        } else {
+            console.log("Validation errors:", validationErrors);
+        }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#3b5d3a] via-[#4b7447] to-[#233d1e]">
@@ -82,7 +82,7 @@ const handleSubmit = async (e) => {
                 {/* Logo */}
                 <div className="bg-[#ebe7e7] rounded-full w-12 h-12 flex items-center justify-center shadow">
                     <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
-                       
+
                         <path
                             d="M48 8C48 8 62 28 54 46C50.5 54.5 38 60 30 52C22 44 32 20 48 8Z"
                             fill="#5B8671"
@@ -90,7 +90,7 @@ const handleSubmit = async (e) => {
                             strokeWidth="2"
                             strokeLinejoin="round"
                         />
-                       
+
                         <path
                             d="M16 20C16 20 8 36 18 48C24 56 38 54 40 44C42 34 28 26 16 20Z"
                             fill="#A7C3A1"
@@ -98,14 +98,14 @@ const handleSubmit = async (e) => {
                             strokeWidth="2"
                             strokeLinejoin="round"
                         />
-                        
+
                         <path
                             d="M39 52C39 52 48 36 48 8"
                             stroke="#386150"
                             strokeWidth="2"
                             strokeLinecap="round"
                         />
-                      
+
                         <path
                             d="M24 48C24 48 18 36 16 20"
                             stroke="#386150"

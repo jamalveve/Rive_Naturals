@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import SkinCareLanding from "../pages/SkincareLanding";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   //added for handle login function
-const [name, setName] = useState('');
-const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-const handleLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch('http://localhost:8080/api/users/login', {
@@ -38,41 +37,41 @@ const handleLogin = async (e) => {
       <div className="w-full max-w-sm flex flex-col items-center">
         {/* Logo */}
         <div className="mb-2 mt-4 flex items-center justify-center">
-  <div className="bg-[#ebe7e7] rounded-full w-12 h-12 flex items-center justify-center shadow">
-    <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
-      {/* Main Leaf (Right) */}
-      <path
-        d="M48 8C48 8 62 28 54 46C50.5 54.5 38 60 30 52C22 44 32 20 48 8Z"
-        fill="#5B8671"
-        stroke="#386150"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      {/* Secondary Leaf (Left, Overlapping) */}
-      <path
-        d="M16 20C16 20 8 36 18 48C24 56 38 54 40 44C42 34 28 26 16 20Z"
-        fill="#A7C3A1"
-        stroke="#386150"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      {/* Main Leaf Vein */}
-      <path
-        d="M39 52C39 52 48 36 48 8"
-        stroke="#386150"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      {/* Secondary Leaf Vein */}
-      <path
-        d="M24 48C24 48 18 36 16 20"
-        stroke="#386150"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  </div>
-</div>
+          <div className="bg-[#ebe7e7] rounded-full w-12 h-12 flex items-center justify-center shadow">
+            <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+              {/* Main Leaf (Right) */}
+              <path
+                d="M48 8C48 8 62 28 54 46C50.5 54.5 38 60 30 52C22 44 32 20 48 8Z"
+                fill="#5B8671"
+                stroke="#386150"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
+              {/* Secondary Leaf (Left, Overlapping) */}
+              <path
+                d="M16 20C16 20 8 36 18 48C24 56 38 54 40 44C42 34 28 26 16 20Z"
+                fill="#A7C3A1"
+                stroke="#386150"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
+              {/* Main Leaf Vein */}
+              <path
+                d="M39 52C39 52 48 36 48 8"
+                stroke="#386150"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              {/* Secondary Leaf Vein */}
+              <path
+                d="M24 48C24 48 18 36 16 20"
+                stroke="#386150"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        </div>
 
         <h2 className="text-[#ffffff] text-lg font-bold mb-6">Rive Naturals</h2>
 
@@ -81,13 +80,13 @@ const handleLogin = async (e) => {
           <h3 className="text-2xl font-bold text-[#e7edea] mb-1 text-center">Login</h3>
           <p className="text-[#ffffff] text-center mb-6">Sign in to continue</p>
           <form className="flex flex-col gap-4"
-          //added for handle login function
-           onSubmit={handleLogin}>
+            //added for handle login function
+            onSubmit={handleLogin}>
             <input
               type="text"
               placeholder="Name"
               // handle login
-                value={name}
+              value={name}
               onChange={e => setName(e.target.value)}
               className="rounded-full px-4 py-2 bg-[#8EC3A7] text-[#386150] placeholder-[#386150] focus:outline-none"
             />

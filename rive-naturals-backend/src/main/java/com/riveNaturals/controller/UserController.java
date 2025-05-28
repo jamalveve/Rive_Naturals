@@ -14,7 +14,7 @@ public class UserController {
 
     @PostMapping("/register")
     public Users register(@RequestBody Users user) {
-            System.out.println("Register endpoint hit with: " + user);
+        System.out.println("Register endpoint hit with: " + user);
 
         return userService.registerUser(user);
     }

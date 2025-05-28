@@ -3,6 +3,12 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import personImage from '../assets/right_illustration.png'
+import AnnouncementBar from "../components/AnnouncementBar";
+// import BestSellersSection from "../components/BestSeller";
+import ProductList from "../components/products/ProductList";
+import ProductHighlights from "../components/products/ProductHighlights";
+import Cart from "./CartPage";
+
 const SkinCareLanding = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -74,6 +80,9 @@ const SkinCareLanding = () => {
                     <span className="block w-8 h-1 bg-[#5f7c6e] mb-1 rounded"></span>
                     <span className="block w-8 h-1 bg-[#5f7c6e] rounded"></span>
                 </button>
+                {/* Cart Button */}
+                {/*  Cart Component */}
+                <Cart />
 
                 {/* Mobile Menu */}
                 {menuOpen && (
@@ -87,6 +96,7 @@ const SkinCareLanding = () => {
                             <span>/</span>
                             <Link to="/register" className="hover:underline" onClick={() => setMenuOpen(false)}>Register</Link>
                         </div>
+
                     </div>
                 )}
             </header>
@@ -135,24 +145,30 @@ const SkinCareLanding = () => {
                             src={personImage}
                             alt="Person"
                             className="
-    relative z-10
-    w-[400px]   // default for mobile
-    sm:w-[500px]
-    md:w-[500px]
-    lg:w-[480px]
-    xl:w-[800px]
-    2xl:w-[800px]
-    h-auto
-    object-contain
-    rounded-3xl
-    shadow-lg
-    transition-all
-    duration-300
-  "/>
+        relative z-10
+        w-[400px]   // default for mobile
+        sm:w-[500px]
+        md:w-[500px]
+        lg:w-[480px]
+        xl:w-[800px]
+        2xl:w-[800px]
+        h-auto
+        object-contain
+        rounded-3xl
+        shadow-lg
+        transition-all
+        duration-300
+    "/>
                     </div>
                 </div>
             </main>
+            {/* <div className="min-h-screen bg-[#faf6f2]"> */}
+
+            <AnnouncementBar />
+            <ProductHighlights />
+            <ProductList />
         </div>
+        // </div>
     );
 };
 

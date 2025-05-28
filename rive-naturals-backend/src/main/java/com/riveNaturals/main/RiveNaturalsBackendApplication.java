@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages={"com.riveNaturals.model","com.riveNaturals.repository","com.riveNaturals.service","com.riveNaturals.controller","com.riveNaturals.main","com.riveNaturals.config"})
 
 @EnableJpaRepositories(basePackages = "com.riveNaturals.repository")
-@EntityScan(basePackages = { "com.riveNaturals.Model"})
+@EntityScan(basePackages = { "com.riveNaturals.model"})
 
 
 public class RiveNaturalsBackendApplication {
