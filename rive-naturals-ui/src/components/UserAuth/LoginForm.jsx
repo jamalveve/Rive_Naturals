@@ -9,27 +9,67 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:8080/api/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, password }),
-      });
-      const result = await response.text();
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch('http://localhost:8080/api/users/login', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ name, password }),
+  //     });
+  //     const result = await response.text();
 
-      if (result === "Login successful") {
-        alert(result);
-        navigate("/SkinCareLanding");  // redirect to home page
-      } else {
-        alert("Invalid credentials");
-      }
-    } catch (error) {
-      alert('Login failed!');
-      console.error(error);
+  //     if (result === "Login successful") {
+  //       alert(result);
+  //       navigate("/SkinCareLanding");  // redirect to home page
+  //     } else {
+  //       alert("Invalid credentials");
+  //     }
+  //      const userData = await response.json();
+
+  //     // ✅ Save role and username to localStorage
+  //     localStorage.setItem('userRole', userData.role);
+  //     localStorage.setItem('username', userData.name);
+  //   } catch (error) {
+  //     alert('Login failed!');
+  //     console.error(error);
+  //   }
+  // };
+const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch('http://localhost:8080/api/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, password }),
+    });
+
+    // Try to parse JSON safely
+    let data;
+    try {
+      data = await response.json();
+    } catch (err) {
+      // No JSON in response
+      data = null;
     }
-  };
+
+    if (!response.ok) {
+      alert(data?.message || "Invalid credentials");
+      return;
+    }
+
+    // Success
+    localStorage.setItem('userRole', data.role);
+    localStorage.setItem('username', data.name);
+    alert(data.message);
+    navigate("/SkinCareLanding");
+  } catch (error) {
+    alert('Login failed!');
+    console.error(error);
+  }
+};
+
+
   return (
 
 

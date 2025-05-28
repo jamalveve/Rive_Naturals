@@ -1,8 +1,8 @@
-package com.riveNaturals.repository;
+    package com.riveNaturals.repository;
 
-import com.riveNaturals.model.Users;
-import org.springframework.data.jpa.repository.JpaRepository;
+    import com.riveNaturals.model.Users;
+    import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<Users, Long> {
-    Users findByName(String name);
-}
+    public interface UserRepository extends JpaRepository<Users, Long> {
+        Users findByName(String name);
+    }

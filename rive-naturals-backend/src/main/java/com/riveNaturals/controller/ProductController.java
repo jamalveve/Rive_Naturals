@@ -42,5 +42,20 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    // Add endpoints for create, update, delete as needed
+    @PostMapping
+    public Products createProduct(@RequestBody Products product) {
+        return productService.createProduct(product);
+    }
+
+    @PutMapping("/{id}")
+    public Products updateProduct(@PathVariable Long id, @RequestBody Products product) {
+        return productService.updateProduct(id, product);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
