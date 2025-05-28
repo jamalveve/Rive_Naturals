@@ -1,10 +1,13 @@
 package com.riveNaturals.service;
 
 import com.riveNaturals.model.Cart;
+import com.riveNaturals.utils.CartItemDTO;
+
 import java.util.List;
 
 public interface CartService {
     Cart addToCart(Cart cart);
-    
-    List<Cart> getAllCarts();
+    List<CartItemDTO> getCarts();
+    void removeFromCart(Long id);
+    Cart updateCartQuantity(Long id, int newQuantity);
 }
