@@ -14,8 +14,8 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String role;  // e.g
+    @Column(nullable = false) // users or Admin
+    private String role; // e.g
 
     @Column(nullable = false, unique = true)
     private String name;

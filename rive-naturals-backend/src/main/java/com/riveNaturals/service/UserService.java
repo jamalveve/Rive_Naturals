@@ -15,12 +15,12 @@ public class UserService {
 
     public Users registerUser(Users user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-   // Assign ADMIN role 
-    if ("adminUser".equalsIgnoreCase(user.getName())) {
-        user.setRole("ADMIN");
-    } else if (user.getRole() == null || user.getRole().isEmpty()) {
-        user.setRole("USER"); // Default role
-    }
+        // Assign ADMIN role
+        if ("adminUser".equalsIgnoreCase(user.getName())) {
+            user.setRole("ADMIN");
+        } else if (user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole("USER"); // Default role
+        }
         return userRepository.save(user);
 
     }
@@ -29,9 +29,9 @@ public class UserService {
         Users user = userRepository.findByName(name);
         return user != null && passwordEncoder.matches(rawPassword, user.getPassword());
     }
-    public Users getUserByName(String name) {
-    return userRepository.findByName(name);
-}
 
-    
+    public Users getUserByName(String name) {
+        return userRepository.findByName(name);
+    }
+
 }

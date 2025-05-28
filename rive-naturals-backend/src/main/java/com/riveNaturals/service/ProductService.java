@@ -7,10 +7,16 @@ import java.util.List;
 
 public interface ProductService {
     List<Products> getAllProducts();
+
     Products getProductById(Long id);
+
     Products createProduct(Products product);
+
     Products updateProduct(Long id, Products product);
+
     void deleteProduct(Long id);
+
     byte[] getProductImage(Long id);
+
     void uploadProductImage(Long id, MultipartFile file) throws IOException;
 }

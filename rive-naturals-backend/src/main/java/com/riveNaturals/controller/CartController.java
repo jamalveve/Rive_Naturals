@@ -1,5 +1,4 @@
 
-
 package com.riveNaturals.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +39,3 @@ public class CartController {
         return cartService.updateCartQuantity(id, newQuantity);
     }
 }
-
