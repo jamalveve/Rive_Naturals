@@ -1,7 +1,7 @@
 package com.riveNaturals.service;
 
 import com.riveNaturals.model.Cart;
-import com.riveNaturals.utils.CartItemDTO;
+import com.riveNaturals.model.CartItemDTO;
 
 import java.util.List;
 
