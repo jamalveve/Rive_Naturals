@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = { "com.riveNaturals.model", "com.riveNaturals.repository",
-		"com.riveNaturals.service", "com.riveNaturals.controller", "com.riveNaturals.main", "com.riveNaturals.config" })
+		"com.riveNaturals.service", "com.riveNaturals.controller", "com.riveNaturals.main", "com.riveNaturals.config",
+		"com.riveNaturals.health" })
 
 @EnableJpaRepositories(basePackages = "com.riveNaturals.repository")
 @EntityScan(basePackages = { "com.riveNaturals.model" })

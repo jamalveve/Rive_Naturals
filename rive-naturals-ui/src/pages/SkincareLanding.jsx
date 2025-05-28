@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import personImage from '../assets/right_illustration.png'
 import AnnouncementBar from "../components/AnnouncementBar";
 // import BestSellersSection from "../components/BestSeller";
@@ -9,8 +9,16 @@ import ProductList from "../components/products/ProductList";
 import ProductHighlights from "../components/products/ProductHighlights";
 import Cart from "./CartPage";
 
+
 const SkinCareLanding = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const navigate = useNavigate();  // initialize navigate
+
+    // Logout handler
+    const handleLogout = () => {
+        // Optional: clear any auth tokens or user data here
+        navigate("/login");  // redirect to login page
+    };
 
     return (
         <div className="min-h-screen bg-[#faf6f2] flex flex-col">
@@ -68,6 +76,18 @@ const SkinCareLanding = () => {
                     <Link to="/login" className="hover:underline">Sign in</Link>
                     <span>/</span>
                     <Link to="/register" className="hover:underline">Register</Link>
+                    {/* Logout button */}
+                    <button
+                        onClick={handleLogout}
+                        className="ml-4 p-2 bg-[#a7c3a1] text-white rounded hover:bg-[#8db38a] transition"
+                        aria-label="Logout"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+                        </svg>
+                    </button>
                 </div>
 
                 {/* Hamburger for Mobile */}
@@ -80,6 +100,7 @@ const SkinCareLanding = () => {
                     <span className="block w-8 h-1 bg-[#5f7c6e] mb-1 rounded"></span>
                     <span className="block w-8 h-1 bg-[#5f7c6e] rounded"></span>
                 </button>
+                
                 {/* Cart Button */}
                 {/*  Cart Component */}
                 <Cart />
@@ -95,6 +116,18 @@ const SkinCareLanding = () => {
                             <Link to="/login" className="hover:underline" onClick={() => setMenuOpen(false)}>Sign in</Link>
                             <span>/</span>
                             <Link to="/register" className="hover:underline" onClick={() => setMenuOpen(false)}>Register</Link>
+                            {/* Logout button */}
+                    <button
+                        onClick={handleLogout}
+                        className="ml-4 p-2 bg-[#a7c3a1] text-white rounded hover:bg-[#8db38a] transition"
+                        aria-label="Logout"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+                        </svg>
+                    </button>
                         </div>
 
                     </div>
